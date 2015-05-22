@@ -8,10 +8,10 @@ output: html_document
 
 ###File structure of Repository
 
-*run_analyses.R  R script to combine and manipulate the UCI HAR Dataset 
+* run_analyses.R  R script to combine and manipulate the UCI HAR Dataset 
 ensuring the resultant data is in Tidy Data format (output file =  /UCI HAR Dataset/TidyData.txt). This code then summarises a subset of this data with respect to Activity and Subject (output file =/UCI HAR Dataset/TidyData.txt).
 
-*CodeBook.RMD provides full instructions on how the tidy dataset was
+* CodeBook.RMD provides full instructions on how the tidy dataset was
 created.
 
 ###What the run-analysis.R script is reliant on.
@@ -20,9 +20,9 @@ The run_analysis.R script was created in Windows OS 7, RStudio 0.98.1056, R 3.2.
 
 The script was compilied using the following packages.  Downloading these packages is included in the script.
 
-*dplyr 0.4.1
-*tidyr 0.2.0
-*data.table 1.9.4  
+* dplyr 0.4.1
+* tidyr 0.2.0
+* data.table 1.9.4  
 
 Data is downloaded manually from:
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
