@@ -1,88 +1,312 @@
+
 ---
 title: "CodeBook"
 output: html_document
 ---
 
-##Getting and Cleaning Data Course Project
+##Codes for output file "TidyData.txt"
+Number in square brackets denotes the column number
 
-This codeBook describes the UCI data, variables and processes coded in run_analysis.R.  The purpose of this script is to:
+ [1] "Activity_label"                      
+  FACTOR:  6 Levels  equating to Activity
 
-Merge the test and training datasets and create a tidy data set from the UCI data (writing to output file /UCI HAR Dataset/TidyData.txt. The tidy dataset conforms to Wickham (2014) Tidy Data principles.
+  WALKING
+  WALKING_UPSTAIRS
+  WALKING_DOWNSTAIRS
+  SITTING
+  STANDING
+  LAYING
 
-*Each measured variable should be in one column
-*Each different observation of that variable should be in a different row
-*There should be one table for each "kind" of variable
-*For multiple tables, a column in the table should be included that allows tables to be linked
-
-The script then creates a summary of these data based on Activity and Subject and writes this to output file /UCI HAR Dataset/Summary.txt.
-
-Prior to running the script the data should be manually downloaded from:
-
-https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-
-Data is extracted manually to a subdirectory in the working directory called
-
-/UCI HAR Dataset 
+[2] "Subject"                             
+   FACTOR:  30 Levels equating to Subject Number
+  0
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+  11
+  12
+  13
+  14
+  15
+  16
+  17
+  18
+  19
+  20
+  21
+  22
+  23
+  24
+  25
+  26
+  27
+  28
+  29
+  30
  
+ [3] "Data"
+ FACTOR: 2 Levels equating to whether the data was derived from the test     or train data sets
+ TEST
+ TRAIN
+ 
+[4] "tBodyAcc.mean...X"                   
+  Mean time domain signalof Body Acceleration on the X axial direction
+  
+[5] "tBodyAcc.mean...Y"                   
+   Mean time domain signal of Body Acceleration on the Y axial direction
+ 
+[6] "tBodyAcc.mean...Z"                   
+   Mean time domain signal of Body Acceleration on the Z axial direction
+  
+[7] "tGravityAcc.mean...X"                
+  Mean time domain signal of Gravity Acceleration on the X axial         direction
 
-###The data structure
+[8] "tGravityAcc.mean...Y"                
+  Mean time domain signal of Gravity Acceleration on the Y axial direction
 
-A full description of the data and variables is provided in the file:
-featuresinfo.txt and README.txt 
+[9] "tGravityAcc.mean...Z"                
+  Mean time domain signal of Gravity Acceleration on the Z axial direction
 
-Additionally information on the experiment and experimental design can be obtained from:
-http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+[10] "tBodyAccJerk.mean...X"               
+  Mean time domain signal of Body Acceleration Jerk on the X axial direction
 
-##A brief outline of the data utilised in this script
+[12] "tBodyAccJerk.mean...Z"
+  Mean time domain signal of Body Acceleration Jerk on the Z axial direction
 
-###The test files:
+[13] "tBodyGyro.mean...X"   
+  Mean time domain signal of Body Gyroscope on the X axial direction
 
-*test/X_test.txt - test data with full range of measured variables  
+[14] "tBodyGyro.mean...Y"
+  Mean time domain signal of Body Gyroscope on the Y axial direction
 
-*test/y_test.txt - the test labels provide labels on the test activity (initially as a factor with 6 numeric levels) 
+[15] "tBodyGyro.mean...Z"
+  Mean time domain signal of Body Gyroscope on the Z axial direction
 
-*test/subject_test.txt - Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+[16] "tBodyGyroJerk.mean...X" 
+  Mean time domain signal of Body Gyroscope Jerk on the X axial direction
 
-###The train files are in exactly the same format:
+[17] "tBodyGyroJerk.mean...Y"              
+  Mean time domain signal of Body Gyroscope Jerk on the Y axial direction
 
-*train/X_train.txt - train data with full range of measured variables
+[18] "tBodyGyroJerk.mean...Z"              
+  Mean time domain signal of Body Gyroscope Jerk on the Z axial direction
 
-*train/y_train.txt - the train labels provide labels on the train activity (initially as a factor with 6 numeric levels) 
+[19] "tBodyAccMag.mean.."                  
+  Mean magnitude (calculated as Euclidean norm) X, Y, Z axial direction for Body Acceleration
 
-*train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+[20] "tGravityAccMag.mean.."   
+  Mean magnitude (calculated as Euclidean norm) X, Y, Z axial direction for Mean time domain signal of Gravity Acceleration
 
-###Generic files common to both datasets
+[21] "tBodyAccJerkMag.mean.."  
+  Mean magnitude (calculated as Euclidean norm) X, Y, Z axial direction for Mean time domain signal of Body Acceleration Jerk
 
-*features.txt: List of all features (i.e. variables being measured)
+[22] "tBodyGyroMag.mean.."
+  Mean magnitude (calculated as Euclidean norm) X, Y, Z axial direction for Mean time domain signal of Body Gyroscope
 
-*activity_labels.txt': Links the test/train activity labels with their activity name.
+[23] "tBodyGyroJerkMag.mean.." 
+  Mean magnitude (calculated as Euclidean norm) X, Y, Z axial direction for Mean time domain signal of Body Gyroscope Jerk
 
+[24] "fBodyAcc.mean...X" 
+  Mean frequency domain signal of Body Acceleration on the X axial direction
+                       
+[25] "fBodyAcc.mean...Y"  
+  Mean frequency domain signal of Body Acceleration on the Y axial direction
+          
+[26] "fBodyAcc.mean...Z" 
+ Mean frequency domain signal of Body Acceleration on the Z axial direction
+          
+[27] "fBodyAcc.meanFreq...X"  
+  Mean frequency domain signal of Body Acceleration frequency on the X axial direction
 
-##A description of the processes conducted in run_analysis.R
+[28] "fBodyAcc.meanFreq...Y"               
+  Mean frequency domain signal of Body Acceleration frequency on the Y axial direction
 
-1) The script reads in the test data/labels and converts them to data.tables (TEST and YTEST respectively) and the test subjects (SUBTEST)
+[29] "fBodyAcc.meanFreq...Z" 
+ Mean frequency domain signal of Body Acceleration frequency on the Z axial direction
 
-2) The script reads in the train data/labels and converts them to data.tables (TRAIN and YTRAIN respectively) and the train subjects (SUBTRAIN)
+[30] "fBodyAccJerk.mean...X"  
+ Mean frequency domain signal of Body Acceleration Jerk on the X axial direction
 
-3) Prior to mergin the test and train data a column Data is created in YTEST with all rows = Test and YTRAIN with all rows = Train. This is to facilitate the splitting of the Test and Train data following mering if required.  
+[31] "fBodyAccJerk.mean...Y"               
+Mean frequency domain signal of Body Acceleration Jerk on the Y axial direction
 
-4) The test and train data are the combined (using cbind) with their specific subjects and labels (i.e. TEST, YTEST and SUBTEST are combined as are TRAIN, YTRAIN and SUBTRAIN) giving data.tables TESTC and TRAINC respectively
+[32] "fBodyAccJerk.mean...Z"      
+Mean frequency domain signal of Body Acceleration Jerk on the Z axial direction
+ 
+[33] "fBodyAccJerk.meanFreq...X"           
+Mean frequency domain signal of Body Acceleration Jerk frequency on the X axial direction
 
-5) The full test (TESTC) and the full train (TRAINC) datasets are then combined (using rbind). Resultant data.table COMB
+[34] "fBodyAccJerk.meanFreq...Y"           
+Mean frequency domain signal of Body Acceleration Jerk frequency on the Y axial direction
 
-6) The features list is read in, converted to a vector and subsetted to remove the first column and the vector named FEA.  The additional elements "Subject", "Activity","Data" are added to this vector. This is to provide column names for the first three columns of the data.table COMB and the provide the appropriate feature names for the remaining columns. Elements of FEA are then made unique (using make.names) and assigned to the combined test train dataset (COMB) using colnames.
+[35] "fBodyAccJerk.meanFreq...Z"           
+Mean frequency domain signal of Body Acceleration Jerk frequency on the Z axial direction
 
-7)  Using select contains ("mean") and select contains ("std") columns of the combined data.table are extracted in as two seperate data.tables which are then bound together to form the data.table (COMB2)
+[36] "fBodyGyro.mean...X"           
+  Mean frequency domain signal of Body Gyroscope on the X axial direction
 
-8)  The activity labels are read in (ACT) and column assigned the names Activity and Activity_label to enable easy merging with the COMB data.
+[37] "fBodyGyro.mean...Y"                  
+Mean frequency domain signal of Body Gyroscope on the Y axial direction
 
-8) Using merge the COMB2 data.table is merged with the Activity labels. This creates an additional column that contains a descriptive activity class that corresponds to the relevant activity number.  
+[38] "fBodyGyro.mean...Z"                  
+Mean frequency domain signal of Body Gyroscope on the Z axial direction
 
-9) The column Activity which contains the activity number is now redundant as this information is now contained in the column Activity-labels. The column subject which corresponds to each subject is converted to a factor.
+[39] "fBodyGyro.meanFreq...X"              
+Mean frequency domain signal of Body Gyroscope frequency on the X axial direction
 
-10) The resultant tidy dataset (TIDY) is written to file /UCI HAR Dataset/TidyData.txt
+[40] "fBodyGyro.meanFreq...Y"              
+Mean frequency domain signal of Body Gyroscope frequency on the Y axial direction
 
-11)  The Tidy Data (TIDY) is then grouped by Activity_label and Subject (using group_by) and summarised to obtain the mean for each column (using  summarise_each(funs(mean)))
+[41] "fBodyGyro.meanFreq...Z"              
+Mean frequency domain signal of Body Gyroscope frequency on the Z axial direction
 
-12) The resultant data is written to the output file /UCI HAR Dataset/Summary.txt
+[42] "fBodyAccMag.mean.."                  
+Mean magnitude (derived from Fast Fourier Transform) X, Y, Z axial direction for Mean frequency domain signal of Body Acceleration
 
+[43] "fBodyAccMag.meanFreq.."              
+Mean magnitude (derived from Fast Fourier Transform) X, Y, Z axial direction for Mean frequency domain signal of Body Acceleration frequency
+
+[44] "fBodyBodyAccJerkMag.mean.."          
+Mean magnitude (derived from Fast Fourier Transform) X, Y, Z axial direction for Mean frequency domain signal of Body Acceleration Jerk
+
+[45] "fBodyBodyAccJerkMag.meanFreq.."      
+Mean magnitude (derived from Fast Fourier Transform) X, Y, Z axial direction for Mean frequency domain signal of Body Acceleration Jerk frequency
+
+[46] "fBodyBodyGyroMag.mean.."             
+  Mean magnitude (derived from Fast Fourier Transform) X, Y, Z axial direction for Mean frequency domain signal of Body Gyroscope
+
+[47] "fBodyBodyGyroMag.meanFreq.."    
+Mean  magnitude (derived from Fast Fourier Transform) X, Y, Z axial direction for Mean frequency domain signal of Body Gyroscope frequency
+     
+[48] "fBodyBodyGyroJerkMag.mean.."         
+Mean magnitude (derived from Fast Fourier Transform) X, Y, Z axial direction for Mean frequency domain signal of Body Gyroscope Jerk
+
+[49] "fBodyBodyGyroJerkMag.meanFreq.."     
+magnitude (derived from Fast Fourier Transform) X, Y, Z axial direction for Mean frequency domain signal of Body Gyroscope Jerk Frequency
+
+[50] "angle.tBodyAccMean.gravity."         
+Angle between vectors Mean time domain signal of Body Acceleration and Gravity acceleration 
+
+[51] "angle.tBodyAccJerkMean..gravityMean."
+Angle between vectors Mean time domain signal of Body Acceleration Jerk and Gravity 
+
+[52] "angle.tBodyGyroMean.gravityMean."    
+Angle between vectors Mean time domain signal of Body Gyroscope and  Gravity
+
+[53] "angle.tBodyGyroJerkMean.gravityMean."
+Angle between vectors Mean time domain signal of Body Gyroscope Jerk and  Mean Gravity
+
+[54] "angle.X.gravityMean."                
+Angle between vectors Mean Gravity on the X axial direction
+
+[55] "angle.Y.gravityMean."                
+Angle between vectors Mean Gravity on the Y axial direction
+
+[56] "angle.Z.gravityMean."                
+Angle between vectors Mean Gravity on the Z axial direction
+
+[57] "tBodyAcc.std...X"                    
+Standard deviation of time domain signalof Body Acceleration on the X axial direction
+
+[58] "tBodyAcc.std...Y"                    
+Standard deviation of time domain signalof Body Acceleration on the Y axial direction
+
+[59] "tBodyAcc.std...Z"
+Standard deviation of time domain signalof Body Acceleration on the Z axial direction
+
+[60] "tGravityAcc.std...X"                 
+  Standard deviation of time domain signal of Gravity Acceleration on the X axial direction
+
+[61] "tGravityAcc.std...Y"                 
+  Standard deviation of time domain signal of Gravity Acceleration on the Y axial direction
+
+[62] "tGravityAcc.std...Z"                 
+  Standard deviation of time domain signal of Gravity Acceleration on the X axial direction
+
+[63] "tBodyAccJerk.std...X"                
+Standard deviation of time domain signal of Body Acceleration Jerk on the X axial direction
+
+[64] "tBodyAccJerk.std...Y"                
+Standard deviation domain signal of Body Acceleration Jerk on the Y axial direction
+
+[65] "tBodyAccJerk.std...Z"                
+Standard deviation domain signal of Body Acceleration Jerk on the Z axial direction
+
+[66] "tBodyGyro.std...X"                   
+Standard deviation of time domain signal of Body Gyroscope on the X axial direction
+
+[67] "tBodyGyro.std...Y"                   
+Standard deviation of time domain signal of Body Gyroscope on the Y axial direction
+
+[68] "tBodyGyro.std...Z"                   
+Standard deviation of time domain signal of Body Gyroscope on the Z axial direction
+
+[69] "tBodyGyroJerk.std...X"               
+Standard deviation time domain signal of Body Gyroscope Jerk on the X axial direction
+
+[70] "tBodyGyroJerk.std...Y"               
+Standard deviation time domain signal of Body Gyroscope Jerk on the Y axial direction
+
+[71] "tBodyGyroJerk.std...Z"               
+Standard deviation time domain signal of Body Gyroscope Jerk on the Z axial direction
+
+[72] "tBodyAccMag.std.."                   
+ Standard deviation of magnitude (calculated as Euclidean norm) X, Y, Z axial direction for Body Acceleration
+
+[73] "tGravityAccMag.std.." 
+Standard deviation of magnitude (calculated as Euclidean norm) X, Y, Z axial direction for Mean time domain signal of Gravity Acceleration               
+
+[74] "tBodyAccJerkMag.std.." 
+Standard deviation of  magnitude (calculated as Euclidean norm) X, Y, Z axial direction for Mean time domain signal of Body Acceleration Jerk    
+
+[75] "tBodyGyroMag.std.."    
+Standard deviation of magnitude (calculated as Euclidean norm) X, Y, Z axial direction for Mean time domain signal of Body Gyroscope            
+
+[76] "tBodyGyroJerkMag.std.."    
+Standard deviation of   magnitude (calculated as Euclidean norm) X, Y, Z axial direction for Mean time domain signal of Body Gyroscope Jerk  
+
+[77] "fBodyAcc.std...X"
+Standard deviation of  frequency domain signal of Body Acceleration on the X axial direction
+
+[78] "fBodyAcc.std...Y"
+Standard deviation of frequency domain signal of Body Acceleration on the Y axial direction               
+
+[79] "fBodyAcc.std...Z"
+Standard deviation of frequency domain signal of Body Acceleration on the Z axial direction
+                   
+[80] "fBodyAccJerk.std...X"                
+Standard deviation frequency domain signal of Body Acceleration Jerk on the X axial direction
+
+[81] "fBodyAccJerk.std...Y"                
+Standard deviation frequency domain signal of Body Acceleration Jerk on the Y axial direction
+
+[82] "fBodyAccJerk.std...Z"    
+Standard deviation frequency domain signal of Body Acceleration Jerk on the Z axial direction
+
+[83] "fBodyGyro.std...X"
+Standard deviation of frequency domain signal of Body Gyroscope on the X axial direction
+                 
+[84] "fBodyGyro.std...Y"    
+Standard deviation of frequency domain signal of Body Gyroscope on the Y axial direction
+           
+[85] "fBodyGyro.std...Z"         
+Standard deviation of frequency domain signal of Body Gyroscope on the Z axial direction
+          
+[86] "fBodyAccMag.std.."        
+Standard deviation of magnitude (derived from Fast Fourier Transform) X, Y, Z axial direction for Mean frequency domain signal of Body Acceleration
+         
+[87] "fBodyBodyAccJerkMag.std.."        
+ Standard deviation of magnitude (derived from Fast Fourier Transform) X, Y, Z axial direction for Mean frequency domain signal of Body Acceleration Jerk
+
+##Codes for output file "Summary.txt"
+
+All Column names are identical to above and they represent the same variables as above but with the variables meaned for each subject and each Activity level.
+
+Column numbers are as above but -1 from the number in brackets
