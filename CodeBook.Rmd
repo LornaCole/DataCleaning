@@ -1,0 +1,88 @@
+---
+title: "CodeBook"
+output: html_document
+---
+
+##Getting and Cleaning Data Course Project
+
+This codeBook describes the UCI data, variables and processes coded in run_analysis.R.  The purpose of this script is to:
+
+Merge the test and training datasets and create a tidy data set from the UCI data (writing to output file /UCI HAR Dataset/TidyData.txt. The tidy dataset conforms to Wickham (2014) Tidy Data principles.
+
+*Each measured variable should be in one column
+*Each different observation of that variable should be in a different row
+*There should be one table for each "kind" of variable
+*For multiple tables, a column in the table should be included that allows tables to be linked
+
+The script then creates a summary of these data based on Activity and Subject and writes this to output file /UCI HAR Dataset/Summary.txt.
+
+Prior to running the script the data should be manually downloaded from:
+
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+Data is extracted manually to a subdirectory in the working directory called
+
+/UCI HAR Dataset 
+ 
+
+###The data structure
+
+A full description of the data and variables is provided in the file:
+featuresinfo.txt and README.txt 
+
+Additionally information on the experiment and experimental design can be obtained from:
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+
+##A brief outline of the data utilised in this script
+
+###The test files:
+
+*test/X_test.txt - test data with full range of measured variables  
+
+*test/y_test.txt - the test labels provide labels on the test activity (initially as a factor with 6 numeric levels) 
+
+*test/subject_test.txt - Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+
+###The train files are in exactly the same format:
+
+*train/X_train.txt - train data with full range of measured variables
+
+*train/y_train.txt - the train labels provide labels on the train activity (initially as a factor with 6 numeric levels) 
+
+*train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+
+###Generic files common to both datasets
+
+*features.txt: List of all features (i.e. variables being measured)
+
+*activity_labels.txt': Links the test/train activity labels with their activity name.
+
+
+##A description of the processes conducted in run_analysis.R
+
+1) The script reads in the test data/labels and converts them to data.tables (TEST and YTEST respectively) and the test subjects (SUBTEST)
+
+2) The script reads in the train data/labels and converts them to data.tables (TRAIN and YTRAIN respectively) and the train subjects (SUBTRAIN)
+
+3) Prior to mergin the test and train data a column Data is created in YTEST with all rows = Test and YTRAIN with all rows = Train. This is to facilitate the splitting of the Test and Train data following mering if required.  
+
+4) The test and train data are the combined (using cbind) with their specific subjects and labels (i.e. TEST, YTEST and SUBTEST are combined as are TRAIN, YTRAIN and SUBTRAIN) giving data.tables TESTC and TRAINC respectively
+
+5) The full test (TESTC) and the full train (TRAINC) datasets are then combined (using rbind). Resultant data.table COMB
+
+6) The features list is read in, converted to a vector and subsetted to remove the first column and the vector named FEA.  The additional elements "Subject", "Activity","Data" are added to this vector. This is to provide column names for the first three columns of the data.table COMB and the provide the appropriate feature names for the remaining columns. Elements of FEA are then made unique (using make.names) and assigned to the combined test train dataset (COMB) using colnames.
+
+7)  Using select contains ("mean") and select contains ("std") columns of the combined data.table are extracted in as two seperate data.tables which are then bound together to form the data.table (COMB2)
+
+8)  The activity labels are read in (ACT) and column assigned the names Activity and Activity_label to enable easy merging with the COMB data.
+
+8) Using merge the COMB2 data.table is merged with the Activity labels. This creates an additional column that contains a descriptive activity class that corresponds to the relevant activity number.  
+
+9) The column Activity which contains the activity number is now redundant as this information is now contained in the column Activity-labels. The column subject which corresponds to each subject is converted to a factor.
+
+10) The resultant tidy dataset (TIDY) is written to file /UCI HAR Dataset/TidyData.txt
+
+11)  The Tidy Data (TIDY) is then grouped by Activity_label and Subject (using group_by) and summarised to obtain the mean for each column (using  summarise_each(funs(mean)))
+
+12) The resultant data is written to the output file /UCI HAR Dataset/Summary.txt
+
