@@ -307,6 +307,22 @@ Standard deviation of magnitude (derived from Fast Fourier Transform) X, Y, Z ax
 
 ##Codes for output file "Summary.txt"
 
-All Column names are identical to above and they represent the same variables as above but with the variables meaned for each subject and each Activity level.
+[1] "Activity_label"
+FACTOR: 6 Levels equating to Activity
+
+WALKING 
+WALKING_UPSTAIRS 
+WALKING_DOWNSTAIRS 
+SITTING 
+STANDING 
+LAYING
+
+[2] "Subject"
+FACTOR: 30 Levels equating to Subject Number 
+
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+
+Column names [3-86] are identical to column names [4-87] in TidyData.txt and they represent the same variables 
+as above but with the variables meaned for each subject and each Activity level.
 
 Column numbers are as above but -1 from the number in brackets
